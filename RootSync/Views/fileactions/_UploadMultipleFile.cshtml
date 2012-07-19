@@ -1,0 +1,76 @@
+﻿@model www.Models.uploadfileModel
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        //is the file api available in this browser        
+        //only override *if* available.        
+        if (new XMLHttpRequest().upload) {
+            $("#upload-files").click(function () {
+                //upload files using the api                
+                //The files property is available from the                
+                //input DOM object                
+                upload_files($("#files-to-upload")[0].files);
+                return false;
+            });
+        }
+    });
+
+    //accepts the input.files parameter    
+    function upload_files(filelist) {
+        if (typeof filelist !== "undefined") {
+            for (var i = 0, l = filelist.length; i < l; i++) {
+                upload_file(filelist[i]);
+            }
+        }
+    }
+
+    //each file upload produces a unique POST    
+    function upload_file(file) {
+        xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                //update the progress bar                
+                $(".progress-bar").css({
+                    width: (evt.loaded / evt.total) * 100 + "%"
+                });
+            }
+        }, false);
+
+        // File uploaded        
+        xhr.addEventListener("load", function () {
+            $(".progress-bar").html("Uploaded");
+            $(".progress-bar").css({ backgroundColor: "#fff" });
+        }, false);
+
+        xhr.open("post", "home/uploadfile", true);
+
+        // Set appropriate headers        
+        // We're going to use these in the UploadFile method       
+        // To determine what is being uploaded.        
+        xhr.setRequestHeader("Content-Type", "multipart/form-data");
+        xhr.setRequestHeader("X-File-Name", file.name);
+        xhr.setRequestHeader("X-File-Size", file.size);
+        xhr.setRequestHeader("X-File-Type", file.type);
+
+        // Send the file        
+        xhr.send(file);
+    }
+ </script>
+
+
+
+
+
+
+@using (Html.BeginForm("UploadFile", "FileActions",        
+    FormMethod.Post, new { 
+        enctype = "multipart/form-data" })) {    
+    
+    <input id="files-to-upload" type="file" multiple name="file" />    
+    <input type='submit' id='upload-files' value=' Upload Files ' />    
+    <div class='progress-bar'></div>
+}

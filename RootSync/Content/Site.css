@@ -1,0 +1,577 @@
+/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+
+body
+{
+    background-color: #f;
+    font-size: .75em;
+    font-family: Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    color: #696969;
+}
+
+header,
+footer,
+nav,
+section {
+    display: block;
+}
+
+
+a:link
+{
+    color: #034af3;
+    text-decoration: none;
+}
+a:visited
+{
+    color: #505abc;
+}
+a:hover
+{
+    color: #1d60ff;
+    text-decoration: underline;
+}
+a:active
+{
+    color: #12eb87;
+}
+
+p, ul
+{
+    margin-bottom: 20px;
+    line-height: 1.6em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1
+{
+    font-size: 2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+h2
+{
+    padding: 0 0 10px 0;
+}
+h3
+{
+    font-size: 1.2em;
+}
+h4
+{
+    font-size: 1.1em;
+}
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*** Layout
+****************************************/
+.wrapper
+{
+	width:950px;
+	margin:0 auto;
+}
+
+#siteheader
+{
+	width:930px;
+	height:15px;
+	padding:10px;
+}
+
+#signinlinks
+{
+    float: right; 
+    position: relative; 
+    width: 200px; 
+}
+
+#signinform
+{
+    width:275px;
+    padding:10px;
+}
+
+#sitemenu
+{
+    position:fixed;  
+    top:53px;  
+    width:90px;
+}
+
+#filesbutton
+{
+	float:left;
+	width:70px;
+	background:#fff;
+	padding:10px;
+	padding-left:35px;
+    cursor:pointer;
+    
+    background-image: url('index.png');
+    background-position:left center;
+    background-repeat: no-repeat;
+}
+
+#filesbutton:Hover
+{
+    background-color:#eee;
+}
+
+
+#contentbody
+{
+    position:relative;
+    width:930px;
+	padding:10px;
+}
+
+#content
+{
+	position:relative;
+	float:right;
+	width:790px;
+	padding:10px;
+}
+
+
+
+#sitefooter
+{
+    position:relative;
+    width:930px;
+	padding:10px;
+}
+
+
+#SolutionColumn
+{
+    position:relative;
+    top:87px;
+    left:0px;
+    width:120px;
+    height:75px;
+}
+
+#CommunityColumn
+{
+    position:relative;
+    top:0px;
+    left:120px;
+    width:120px;
+    height:75px;
+}
+
+#AboutColumn
+{
+    position:relative;
+    top:-87px;
+    left:240px;
+    width:120px;
+    height:75px;
+}
+
+#SupportColumn
+{
+    position:relative;
+    top:-174px;
+    left:360px;
+    width:160px;
+    height:75px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*** Styles for Files
+****************************************/
+
+/* TOP MENU ROW */
+#MenuRow
+{
+    height:25px;
+    padding:5px;
+    padding-left:0px;
+    font-size:large;
+}
+
+#MenuIcon
+{
+    float:left;
+    width:27px;
+}
+
+#MenuGT
+{
+    float:left;
+    padding-top:5px;
+}
+
+#MenuLocation
+{
+    position:inherit;
+    padding:3px;
+}
+
+#MenuOptions
+{
+    position:relative;
+    float:right;
+    top:-23px;
+    width:300px;
+    text-align:right;
+}
+
+#UploadFileButton
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 16px;
+    height: 18px;
+    font-size: x-small;
+    
+}
+
+#UploadFileButton:Hover
+{
+    background-color:#efefef;
+}
+
+#NewFolderButton
+{
+    position:absolute;
+    top:0px;
+    left:25px;
+    width: 16px;
+    height: 18px;
+    font-size:x-small;
+}
+
+#NewFolderButton:Hover
+{
+    background-color:#efefef;
+}
+
+/* TOP MENU ROW */
+
+
+
+
+
+
+
+/* HEADER ROW */
+
+#HeaderRow
+{
+    height:27px;
+    border-top:1px #82CFFA solid;
+    border-bottom:1px #82CFFA solid;
+    background-color:#F0F9FF;
+    padding:5px;
+}
+
+#HeaderName
+{
+    padding:8px;
+    padding-left:35px;
+    width:350px;
+    font-size:small;
+    color:#2281D2;
+}
+
+#HeaderAttributes
+{
+    position:relative;
+    float:right;
+    top:-24px;
+    width:280px;
+    font-size:small;
+    color:#2281D2;
+}
+/* HEADER ROW */
+
+
+
+
+
+
+#row
+{
+    border-bottom:1px #EDF1F5 solid;
+    padding:5px;
+    cursor:pointer;
+}
+
+#row:Hover
+{
+    background-color:#F7FCFF;
+}
+
+
+
+#folderName
+{
+    background-image: url('folder.png');
+    background-position:left center;
+    background-repeat: no-repeat;
+    padding:5px;
+    padding-left:35px;
+}
+
+#folderName a:link
+{
+    color:#696969;
+}
+
+#folderName a:visited
+{
+    color:#696969;
+}
+
+
+#fileName
+{
+    background-image: url('file.png');
+    background-position:left center;
+    background-repeat: no-repeat;
+    padding:8px;
+    padding-left:35px;
+}
+
+#fileName a:link
+{
+    color:#696969;
+}
+
+#fileName a:visited
+{
+    color:#696969;
+}
+
+#fileAttributes
+{
+    position:relative;
+    float:right;
+    top:-23px;
+    width:280px;
+}
+
+#fileSize
+{
+   float:left;
+   width:75px;
+}
+
+#fileModified
+{
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+fieldset 
+{
+    border:1px solid #ddd;
+    padding:0 1.4em 1.4em 1.4em;
+    margin:0 0 1.5em 0;
+}
+
+fieldset p 
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset label 
+{
+    display: block;
+}
+
+fieldset label.inline 
+{
+    display: inline;
+}
+
+legend 
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+textarea 
+{
+    min-height: 75px;
+}
+
+.editor-label 
+{
+    margin: 1em 0 0 0;
+}
+
+.editor-field 
+{
+    margin:0.5em 0 0 0;
+}
+
+
+
+input[type="text"] 
+{
+    width: 220px;
+    padding:5px;
+}
+
+input[type="password"] 
+{
+    width: 220px;
+    padding:5px;
+}
+
+
+
+
+
+
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+
+
+
+/* TABLE
+----------------------------------------------------------*/
+
+table 
+{
+  border: solid 1px #e8eef4;
+  border-collapse: collapse;
+}
+
+table td 
+{
+  padding: 5px;   
+  border: solid 1px #e8eef4;
+}
+
+table th
+{
+  padding: 6px 5px;
+  text-align: left;
+  background-color: #e8eef4; 
+  border: solid 1px #e8eef4;   
+}
+
+
+
+
+
+
+
+

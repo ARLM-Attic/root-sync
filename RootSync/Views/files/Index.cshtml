@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Files";
+}
+
+<script type="text/javascript">
+    $.ajaxSetup({ cache: false });
+    $(document).ready(function () {
+
+        //        var x = $(signin).position().left;
+        //        var y = $(signin).position().top + $(signin).height() * 2;
+
+        $(".openDialog").live("click", function (e) {
+            e.preventDefault();
+
+            var newDiv = $("<div></div>");
+            newDiv.addClass("dialog");
+            newDiv.attr("id", $(this).data("data_dialog_id"));
+            newDiv.appendTo($('body')); // is error really here? 
+            newDiv.dialog({
+                title: $(this).attr("data_dialog_title"),
+                draggable: false,
+                bgiframe: true,
+                modal: true,
+                closeOnEscape: true,
+                resizable: false,
+                close: function () {
+                    $(this).remove()
+                }
+            }).load(this.href);
+        });
+
+        $(".close").live("click", function (e) {
+            e.preventDefault();
+            $(this).closest(".dialog").dialog("close");
+        });
+    });
+    </script>
+
+
+
+
+
+    <div id="MenuRow">
+        <div id="MenuIcon">
+            @if (ViewBag.ShowGT)
+            {
+                <a href='@Url.Content("~/files/" + ViewBag.parentpath)'> 
+                    <img src='@Url.Content("~/Content/index_up.png")' border="0" /></a> 
+            }
+            else
+            {
+                <a href='@Url.Content("~/files/" + ViewBag.parentpath)'> 
+                    <img src='@Url.Content("~/Content/index.png")' border="0" /></a> 
+            }
+        </div>
+
+            @if (ViewBag.ShowGT)
+            {
+                <div id="MenuGT">
+                <img src="@Url.Content("~/Content/GreaterThan.png")" border="0" />
+                </div>
+            }
+        <div id="MenuLocation">@ViewBag.FolderName</div>
+
+
+        <div id="MenuOptions">
+            <div id="UploadFileButton">
+                <a class="openDialog" data_dialog_id="newfolderDialog" data_dialog_title="Upload File" href="/FileActions/UploadFile?path=@ViewBag.path.Replace(" ", "%20")">
+                    <img src="@Url.Content("~/Content/document_up.png")" border="0" /></a>
+            </div>
+            <div id="NewFolderButton">
+                <a class="openDialog" data_dialog_id="createDialog" data_dialog_title="New Folder" href="/FileActions/NewFolder?path=@ViewBag.path.Replace(" ", "%20")">
+                    <img src="@Url.Content("~/Content/folder_add.png")" border="0" /></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="HeaderRow">
+        <div id="HeaderName">Name</div>
+        <div id="HeaderAttributes">
+            <div id="fileSize">Size</div><div id="fileModified">Last Modified</div>
+        </div>
+    </div>
+
+    <div id="_index">
+    @Html.Partial("_Index")
+    </div>
