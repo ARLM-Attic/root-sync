@@ -41,7 +41,7 @@ namespace www.Controllers
         //    if (file != null) {        
         //        //Uploads.Add(file);    
 
-        //        string FTPPath = "C:/inetpub/ftproot/" + User.Identity.Name + "/";
+        //        string FTPPath = www.Core.Utility.storagePath() + User.Identity.Name + "/";
         //        var fileName = FTPPath + System.IO.Path.GetFileName(file.FileName);
         //        file.SaveAs(fileName);
 
@@ -63,7 +63,7 @@ namespace www.Controllers
                 
                 var fileName = System.IO.Path.GetFileName(file.Filename);
 
-                string FTPPath = "C:/inetpub/ftproot/" + User.Identity.Name + "/";
+                string FTPPath = www.Core.Utility.storagePath() + User.Identity.Name + "/";
 
                 //first validate this user's folder exists, if not, we need to create it.
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);
@@ -191,7 +191,7 @@ namespace www.Controllers
             try
             {
 
-                string FTPPath = "C:/inetpub/ftproot/" + User.Identity.Name + "/";
+                string FTPPath = www.Core.Utility.storagePath() + User.Identity.Name + "/";
 
                 //first validate this user's folder exists, if not, we need to create it.
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);

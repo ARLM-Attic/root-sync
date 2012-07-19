@@ -157,7 +157,7 @@ namespace www.Controllers
 
                 //-----------------
                 //FILES - create ftp folder if it doesn't exist.
-                string FTPPath = "C:/inetpub/ftproot/" + userId + "/";
+                string FTPPath = www.Core.Utility.storagePath() + userId + "/";
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);
                 //-----------------
 

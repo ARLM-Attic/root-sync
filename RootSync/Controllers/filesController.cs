@@ -19,7 +19,9 @@ namespace www.Controllers
            
             try
             {
-                string rootpath = "C:/inetpub/ftproot/" + User.Identity.Name + "/";
+
+
+                string rootpath = www.Core.Utility.storagePath() + User.Identity.Name + "/";
                 string FTPPath = rootpath;
 
                 //first validate this user's folder exists, if not, we need to create it.

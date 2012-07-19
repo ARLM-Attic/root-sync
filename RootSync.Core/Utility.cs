@@ -29,6 +29,22 @@ namespace www.Core
             // Adjust the format string to your preferences. For example "{0:0.#}{1}" would 
             // show a single decimal place, and no space. 
             return String.Format("{0:0.##} {1}", size, sizes[order]);
+
+        }
+
+
+        /// <summary>
+        /// Returns the location configured in the Properties.Settings.settings file
+        /// the storagePath is the root path of our storage.  In my servers case this is e:\ftproot
+        /// </summary>
+        /// <returns></returns>
+        public static string storagePath()
+        {
+            string sp = Properties.Settings.Default.storagePath;
+
+            if (!sp.EndsWith(@"\")) sp += @"\";
+
+            return sp;
         }
 
 

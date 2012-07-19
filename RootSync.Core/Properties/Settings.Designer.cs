@@ -22,5 +22,14 @@ namespace www.Core.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("e:\\ftproot")]
+        public string storagePath {
+            get {
+                return ((string)(this["storagePath"]));
+            }
+        }
     }
 }
