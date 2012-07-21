@@ -7,6 +7,7 @@ using System.Security.Principal;
 using www.Models;
 using System.Web.Security;
 using System.Threading;
+using System.Configuration;
 
 
 namespace www.Controllers
@@ -102,7 +103,16 @@ namespace www.Controllers
             }
 
             //if (model.Username == "daniel" && model.Password == "1234") //simulate data store call where username/password exists
-            Int32 UserID = DataAccess.DAL.UserIsValid(model.Username, model.Password);
+            Int32 UserID = -1;
+
+            try
+            {
+                UserID = DataAccess.DAL.UserIsValid(model.Username, model.Password);
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             if (UserID != -1)
             {
@@ -149,15 +159,20 @@ namespace www.Controllers
             }
 
 
-            Int32 userId = DataAccess.DAL.RegisterAccount(model.First, model.Last, model.Username, model.Password);
-
-            if (userId != -1)
+            Int32 UserID = -1;
+            try
             {
-                FormsAuthentication.SetAuthCookie(userId.ToString(), true); //false = cookie destroyed by closing browser window
+                UserID = DataAccess.DAL.RegisterAccount(model.First, model.Last, model.Username, model.Password);
+            }
+            catch (Exception ex) { }
+
+            if (UserID != -1)
+            {
+                FormsAuthentication.SetAuthCookie(UserID.ToString(), true); //false = cookie destroyed by closing browser window
 
                 //-----------------
                 //FILES - create ftp folder if it doesn't exist.
-                string FTPPath = www.Core.Utility.storagePath() + userId + "/";
+                string FTPPath = ConfigurationManager.AppSettings["path"] + UserID + "/";
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);
                 //-----------------
 

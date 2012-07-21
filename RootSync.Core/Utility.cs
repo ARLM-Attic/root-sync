@@ -33,20 +33,7 @@ namespace www.Core
         }
 
 
-        /// <summary>
-        /// Returns the location configured in the Properties.Settings.settings file
-        /// the storagePath is the root path of our storage.  In my servers case this is e:\ftproot
-        /// </summary>
-        /// <returns></returns>
-        public static string storagePath()
-        {
-            string sp = Properties.Settings.Default.storagePath;
-
-            if (!sp.EndsWith(@"\")) sp += @"\";
-
-            return sp;
-        }
-
+       
 
 
 

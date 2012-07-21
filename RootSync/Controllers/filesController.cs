@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
+using System.Configuration;
 
 namespace www.Controllers
 {
@@ -19,9 +20,10 @@ namespace www.Controllers
            
             try
             {
+                ViewBag.ShowGT = false;
+                
 
-
-                string rootpath = www.Core.Utility.storagePath() + User.Identity.Name + "/";
+                string rootpath = ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
                 string FTPPath = rootpath;
 
                 //first validate this user's folder exists, if not, we need to create it.
@@ -40,7 +42,6 @@ namespace www.Controllers
 
 
 
-                ViewBag.ShowGT = false;
                     
                 if (System.IO.File.Exists(FTPPath + path))  //download the file
                 {

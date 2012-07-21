@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.IO;
 using System.Threading;
 using www.Models;
+using System.Configuration;
 
 namespace www.Controllers
 {
@@ -41,7 +42,7 @@ namespace www.Controllers
         //    if (file != null) {        
         //        //Uploads.Add(file);    
 
-        //        string FTPPath = www.Core.Utility.storagePath() + User.Identity.Name + "/";
+        //        string FTPPath = ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
         //        var fileName = FTPPath + System.IO.Path.GetFileName(file.FileName);
         //        file.SaveAs(fileName);
 
@@ -63,7 +64,7 @@ namespace www.Controllers
                 
                 var fileName = System.IO.Path.GetFileName(file.Filename);
 
-                string FTPPath = www.Core.Utility.storagePath() + User.Identity.Name + "/";
+                string FTPPath = ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
 
                 //first validate this user's folder exists, if not, we need to create it.
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);
@@ -191,7 +192,7 @@ namespace www.Controllers
             try
             {
 
-                string FTPPath = www.Core.Utility.storagePath() + User.Identity.Name + "/";
+                string FTPPath = ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
 
                 //first validate this user's folder exists, if not, we need to create it.
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);

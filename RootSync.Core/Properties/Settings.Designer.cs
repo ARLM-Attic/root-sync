@@ -25,10 +25,12 @@ namespace www.Core.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("e:\\ftproot")]
-        public string storagePath {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|www.mdf;Integrated Secur" +
+            "ity=True;User Instance=True")]
+        public string wwwConnectionString {
             get {
-                return ((string)(this["storagePath"]));
+                return ((string)(this["wwwConnectionString"]));
             }
         }
     }
