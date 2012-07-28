@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.Web.Security;
 using System.Security.Principal;
 using System.Threading;
+using System.Data.Entity;
+using rootsync.Business.Models;
 
 
 
@@ -50,6 +52,8 @@ namespace www
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            Database.SetInitializer<RootSyncContext>(new RootSyncCustomInitializer());
         }
 
 

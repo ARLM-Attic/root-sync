@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -197,6 +197,10 @@
     <Content Include="Views\Shared\_AnonLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\rootsync.Business\rootsync.Business.csproj">
+      <Project>{3A387597-D5B9-4659-96B5-467C80D3DF9E}</Project>
+      <Name>rootsync.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RootSync.Core\www.Core.csproj">
       <Project>{749CB505-5184-4AFD-8039-5F4AF66839C5}</Project>
       <Name>www.Core</Name>

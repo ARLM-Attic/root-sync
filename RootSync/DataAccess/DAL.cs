@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using www.Controllers;
 using www.Models;
+using rootsync.Business.Models;
 
 namespace www.DataAccess
 {
@@ -33,33 +34,26 @@ namespace www.DataAccess
         /// <returns>UserID value from the database</returns>
         public static Int32 UserIsValid(string Username, string Password, bool updateLastLogin)
         {
-            Int32 UserID = -1;
+            Int32 userID = -1;
 
             string query = string.Format("SELECT UserID, Password FROM [User] WHERE Username = '{0}'", Username);
 
-            using(SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
-                SqlDataReader sdr = cmd.ExecuteReader();
-                if (sdr.Read()) {
+            //using(SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
+            using (RootSyncContext context = new RootSyncContext()) {
 
-                    //compare user entered password with the encrypted one in our database
-                    bool valid = Helper.VerifyHash(Password, "SHA512", (string)sdr["Password"]);
-                    if (valid) { UserID = (Int32)sdr["UserID"]; }
+                User usr = context.Users.FirstOrDefault(u => u.Username == Username);
+                bool valid = Helper.VerifyHash(Password, "SHA512", usr.Password);
+                if (valid) { userID = usr.UserID; }
 
-                    sdr.Close();
+                if (usr != null && updateLastLogin) {
+                    usr.LastLogin = DateTime.Now;
+                    context.SaveChanges();
                 }
 
-                if (UserID != -1 && updateLastLogin) {
-                    query = string.Format("UPDATE [User] SET LastLogin='{0}' WHERE UserId='{1}';", DateTime.Now, UserID);
-                    cmd = new SqlCommand(query, conn);
-                    cmd.ExecuteNonQuery();
-                }
-
-                conn.Close();
+                context.Dispose();
             }
 
-            return UserID;
+            return userID;
         }
 
         /// <summary>
@@ -76,14 +70,21 @@ namespace www.DataAccess
                 
             string hash = Helper.ComputeHash(Password, "SHA512", null);
 
-            string query = string.Format("INSERT INTO [User] (First, Last, Username, Password, LastLogin) OUTPUT INSERTED.UserID VALUES('{0}','{1}','{2}','{3}','{4}');", First, Last, Username, hash, DateTime.Now);
+            using (RootSyncContext context = new RootSyncContext()) {
+                User usr = new User();
+                usr.First = First;
+                usr.Last = Last;
+                usr.Username = Username;
+                usr.Password = hash;
+                usr.LastLogin = DateTime.Now;
 
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
-                UserID = (Int32)cmd.ExecuteScalar();
+                context.Users.Add(usr);
 
-                conn.Close();
+                context.SaveChanges();
+
+                UserID = usr.UserID;
+
+                context.Dispose();
             }
 
             return UserID;
@@ -99,24 +100,17 @@ namespace www.DataAccess
         {
             accountModel user = null;
 
-            string query = string.Format("SELECT * FROM [User] WHERE UserId='{0}';", UserID);
-
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
-                SqlDataReader sdr = cmd.ExecuteReader();
-                if (sdr.Read()) {
+            using (RootSyncContext context = new RootSyncContext()) {
+                User usr = context.Users.FirstOrDefault(u => u.UserID == UserID);
+                if (usr != null) {
                     user = new accountModel();
-
-                    user.First = (string)sdr["First"];
-                    user.Last = (string)sdr["Last"];
-                    user.Username = (string)sdr["Username"];
-                    //user.Password = (string)sdr["Password"];
+                    user.First = usr.First;
+                    user.Last = usr.Last;
+                    user.Username = usr.Username;
                 }
-                sdr.Close();
-                conn.Close();
+
+                context.Dispose();
             }
-            
 
             return user;            
         }
@@ -130,12 +124,15 @@ namespace www.DataAccess
         /// <returns>Returns a true/false if the database update was successful.</returns>
         public static void UpdateAccount(Int32 UserID, accountModel model)
         {
-            string query = string.Format("UPDATE [User] SET First='{0}',Last='{1}' WHERE UserId='{2}';", model.First, model.Last, UserID);
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.ExecuteNonQuery();
-                conn.Close();
+            using (RootSyncContext context = new RootSyncContext()) {
+                User usr = context.Users.First(u => u.UserID == UserID);
+
+                usr.First = model.First;
+                usr.Last = model.Last;
+
+                context.SaveChanges();
+
+                context.Dispose();
             }
         }
     }
