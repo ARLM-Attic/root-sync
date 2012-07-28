@@ -39,41 +39,21 @@ namespace www.Controllers
         {
             Int32 userId = Int32.Parse(User.Identity.Name);
 
-            if (!DataAccess.DAL.updateAccount(userId, model))
-            {
+            try {
+                DataAccess.DAL.UpdateAccount(userId, model);
+            } catch (Exception ex) {
                 ModelState.AddModelError("", "Failure to save profile!");
             }
-            else
-            {
-                ViewBag.Message = "Successfully Updated!";
-            }
-
+            ViewBag.Message = "Successfully Updated!";
 
             return View("Edit");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
         }
-
 
 
         [HttpGet]
@@ -107,7 +87,7 @@ namespace www.Controllers
 
             try
             {
-                UserID = DataAccess.DAL.UserIsValid(model.Username, model.Password);
+                UserID = DataAccess.DAL.UserIsValid(model.Username, model.Password, true);
             }
             catch (Exception ex)
             {

@@ -11,52 +11,53 @@ namespace www.DataAccess
 {
     public class DAL
     {
-        static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString());
-
+        //static SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString());
 
         /// <summary>
-        /// Validates whether the user entered credentials match with those in our database.
+        /// <para>Validates whether the user entered credentials match with those in our database.</para>
+        /// <para>LastLogin will NOT be updated.</para>
         /// </summary>
         /// <param name="Username">Users name/email in a string</param>
         /// <param name="Password">Users password in a string</param>
         /// <returns>UserID value from the database</returns>
-        public static Int32 UserIsValid(string Username, string Password)
+        public static int UserIsValid(string username, string password) {
+            return UserIsValid(username, password, false);
+        }
+
+        /// <summary>
+        /// <para>Validates whether the user entered credentials match with those in our database.</para>
+        /// </summary>
+        /// <param name="Username">Users name/email in a string</param>
+        /// <param name="Password">Users password in a string</param>
+        /// <param name="updateLastLogin">Whether to update the LastLogin column with DateTime.Now.</param>
+        /// <returns>UserID value from the database</returns>
+        public static Int32 UserIsValid(string Username, string Password, bool updateLastLogin)
         {
             Int32 UserID = -1;
 
             string query = string.Format("SELECT UserID, Password FROM [User] WHERE Username = '{0}'", Username);
 
-            try
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
+            using(SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
                 conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataReader sdr = cmd.ExecuteReader();
-                if (sdr.HasRows)
-                {
-                    sdr.Read();
+                if (sdr.Read()) {
 
                     //compare user entered password with the encrypted one in our database
                     bool valid = Helper.VerifyHash(Password, "SHA512", (string)sdr["Password"]);
-                    if (valid)
-                        UserID = (Int32)sdr["UserID"];
+                    if (valid) { UserID = (Int32)sdr["UserID"]; }
 
                     sdr.Close();
                 }
 
-
-                if (UserID != -1) //if falid login, Update last login so we can track this
-                {
+                if (UserID != -1 && updateLastLogin) {
                     query = string.Format("UPDATE [User] SET LastLogin='{0}' WHERE UserId='{1}';", DateTime.Now, UserID);
-                    try
-                    {
-                        cmd = new SqlCommand(query, conn);
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch { }
+                    cmd = new SqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
                 }
+
+                conn.Close();
             }
-            catch { UserID = -1; }
-            finally { conn.Close(); }
 
             return UserID;
         }
@@ -77,15 +78,13 @@ namespace www.DataAccess
 
             string query = string.Format("INSERT INTO [User] (First, Last, Username, Password, LastLogin) OUTPUT INSERTED.UserID VALUES('{0}','{1}','{2}','{3}','{4}');", First, Last, Username, hash, DateTime.Now);
 
-            try
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
                 conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
                 UserID = (Int32)cmd.ExecuteScalar();
+
+                conn.Close();
             }
-            catch (SqlException sex) { UserID = -1; }
-            catch (Exception ex) { UserID = -1; }
-            finally { conn.Close(); }
 
             return UserID;
         }
@@ -102,25 +101,22 @@ namespace www.DataAccess
 
             string query = string.Format("SELECT * FROM [User] WHERE UserId='{0}';", UserID);
 
-
-            try
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
                 conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataReader sdr = cmd.ExecuteReader();
-                if (sdr.HasRows)
-                {
+                if (sdr.Read()) {
                     user = new accountModel();
-                    sdr.Read();
 
                     user.First = (string)sdr["First"];
                     user.Last = (string)sdr["Last"];
                     user.Username = (string)sdr["Username"];
                     //user.Password = (string)sdr["Password"];
                 }
+                sdr.Close();
+                conn.Close();
             }
-            catch { user = null; }
-            finally { conn.Close(); }
+            
 
             return user;            
         }
@@ -132,23 +128,15 @@ namespace www.DataAccess
         /// <param name="UserID">Database UserID for this user.</param>
         /// <param name="model">accountModel containing the users updated information.</param>
         /// <returns>Returns a true/false if the database update was successful.</returns>
-        public static bool updateAccount(Int32 UserID, accountModel model)
+        public static void UpdateAccount(Int32 UserID, accountModel model)
         {
-            bool success = false;
-
             string query = string.Format("UPDATE [User] SET First='{0}',Last='{1}' WHERE UserId='{2}';", model.First, model.Last, UserID);
-
-            try
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ToString())) {
                 conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
-                success = true;
+                conn.Close();
             }
-            catch { success = false; }
-            finally { conn.Close(); }
-
-            return success;
         }
     }
 }
