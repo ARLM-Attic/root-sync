@@ -4,7 +4,8 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
      
-@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "registerDialog" }))
+@*using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "registerDialog" }))*@
+@using (Html.BeginForm("Register", "Account", "POST"))
 {    
     @Html.ValidationSummary(true)
     @ViewBag.Message
