@@ -22,7 +22,6 @@
             var y = $(signinlinks).position().top + $(signinlinks).height() * 1.5;
 
             $(".openDialog").live("click", function (e) {
-                console.log('openDialog click fired');
                 e.preventDefault();
 
                 var newDiv = $("<div></div>");
@@ -69,13 +68,9 @@
                             },
                             error: function (jqXhr, textStatus, errorThrown) {
 
-                                console.log("ajax error");
-
                                 alert("Error '" + jqXhr.status + "' (textStatus: '" + textStatus + "', errorThrown: '" + errorThrown + "')");
                             },
                             complete: function () {
-
-                                console.log("ajax complete");
 
                                 $("#ProgressDialog").dialog("close");
                             }
