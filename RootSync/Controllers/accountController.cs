@@ -132,10 +132,15 @@ namespace www.Controllers
         {
             if (!ModelState.IsValid)
             {
-                if (Request.IsAjaxRequest())
-                    return PartialView("_register", model);
-
-                return View(model);
+                if (Request.IsAjaxRequest()) {
+                    return Json(new {
+                        status = "failure",
+                        responseHTML = this.RenderPartialViewToString("_register", model)
+                    });
+                } else {
+                    //return PartialView("_register", model);
+                    return View(model);
+                }
             }
 
 
@@ -144,10 +149,16 @@ namespace www.Controllers
             {
                 UserID = DataAccess.DAL.RegisterAccount(model.First, model.Last, model.Username, model.Password);
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+                if (Request.IsAjaxRequest()) {
+                    return Json(new {
+                        status = "error",
+                        responseHTML = this.RenderPartialViewToString("~/Views/Error/AjaxError.cshtml", ex)
+                    });
+                }
+            }
 
-            if (UserID != -1)
-            {
+            if (UserID != -1) {
                 FormsAuthentication.SetAuthCookie(UserID.ToString(), true); //false = cookie destroyed by closing browser window
 
                 //-----------------
@@ -156,12 +167,11 @@ namespace www.Controllers
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);
                 //-----------------
 
-
-
-                if (!Request.Path.ToLower().Contains("signin"))
-                    return JavaScript("location.reload(true)");
-                else return JavaScript("window.location = '" + Request.Url.ToString().ToLower().Replace("/signin", "") + "'");
-
+                return Json(new { status = "success", responseHTML = "" });
+            } else {
+                if (Request.IsAjaxRequest()) {
+                    return Json(new { status = "error", responseHTML = this.RenderPartialViewToString("~/Views/Error/AjaxError.cshtml", new Exception("Generic failure. UserID is -1.")) });
+                }
             }
 
             return View();
