@@ -41,11 +41,11 @@ namespace www.Controllers
 
             try {
                 DataAccess.DAL.UpdateAccount(userId, model);
+                ViewBag.Message = "Successfully Updated!";
             } catch (Exception ex) {
                 ModelState.AddModelError("", "Failure to save profile!");
             }
-            ViewBag.Message = "Successfully Updated!";
-
+            
             return View("Edit");
         }
 
