@@ -7,11 +7,13 @@
 
 
 @foreach (FileInfo file in Model[1])
-{
+{ 
     <div class="clsRow clsFileRow" id="row">
-        <div class="clsFileName">@Html.ActionLink(file.Name, null, new { @path = ViewBag.path + file.Name })</div>
+        <div class="clsFileName"><a class="lnkFileName" data-fileurl="@Url.Action(file.Name)" href="@Url.Action(file.Name)">@file.Name</a></div>
         <div class="clsFileAttributes">
             <div class="clsFileSize">@www.Core.Utility.FileSize(file.Length)</div><div class="clsFileModified">@file.LastWriteTime</div>
         </div>
     </div>
+    
+    @*Html.ActionLink(file.Name, null, new { @path = ViewBag.path + file.Name })*@
 }

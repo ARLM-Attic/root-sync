@@ -62,6 +62,26 @@
         },
             function (action, element, position) {
                 alert('action ' + action + ' element ' + element + ' position ' + position);
+            });
+
+        $('.clsFileRow').draggable({ helper: 'clone' })
+                        .click(function () {
+                            if ($(this).is('.ui-draggable-dragging')) {
+                                return false; //don't download file
+                            }
+                            //alert($(this).find('a').first().data('fileurl'));
+
+                            //$('.ui-draggable-dragging').draggable('option', 'revert', true).trigger('mouseup');
+                            $(this).draggable('option', 'revert', true).trigger('mouseup');
+                            return true; //download the file (or perform default action)
+                        });
+        $('.clsFolderRow').droppable({
+            drop: function (event, ui) {
+                var sourceFile = ui.draggable.find('a').first().data('fileurl');
+                var destFolder = $(this).find('.clsFolderName a').first().attr('href');
+                alert('codeme: move from ' + sourceFile + ' to ' + destFolder);
+
+            }
         });
 
     });
