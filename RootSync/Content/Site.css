@@ -351,21 +351,21 @@ first child of the left and right table columns */
 
 
 
-#row
+.clsRow
 {
     border-bottom:1px #EDF1F5 solid;
     padding:5px;
     cursor:pointer;
 }
 
-#row:Hover
+.clsRow:Hover
 {
     background-color:#F7FCFF;
 }
 
 
 
-#folderName
+.clsFolderName
 {
     background-image: url('folder.png');
     background-position:left center;
@@ -374,18 +374,18 @@ first child of the left and right table columns */
     padding-left:35px;
 }
 
-#folderName a:link
+.clsFolderName a:link
 {
     color:#696969;
 }
 
-#folderName a:visited
+.clsFolderName a:visited
 {
     color:#696969;
 }
 
 
-#fileName
+.clsFileName
 {
     background-image: url('file.png');
     background-position:left center;
@@ -394,17 +394,17 @@ first child of the left and right table columns */
     padding-left:35px;
 }
 
-#fileName a:link
+.clsFileName a:link
 {
     color:#696969;
 }
 
-#fileName a:visited
+.clsFileName a:visited
 {
     color:#696969;
 }
 
-#fileAttributes
+.clsFileAttributes
 {
     position:relative;
     float:right;
@@ -412,13 +412,13 @@ first child of the left and right table columns */
     width:280px;
 }
 
-#fileSize
+.clsFileSize
 {
    float:left;
    width:75px;
 }
 
-#fileModified
+.clsFileModified
 {
    
 }

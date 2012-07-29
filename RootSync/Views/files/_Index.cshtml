@@ -1,18 +1,17 @@
-﻿
-@foreach (DirectoryInfo dir in Model[0])
+﻿@foreach (DirectoryInfo dir in Model[0])
 {
-    <div id="row">
-        <div id="folderName">@Html.ActionLink(dir.Name, null, new { @path = ViewBag.path + dir.Name })</div>
+    <div class="clsRow clsFolderRow">
+        <div class="clsFolderName">@Html.ActionLink(dir.Name, null, new { @path = ViewBag.path + dir.Name })</div>
     </div>
 }
 
 
 @foreach (FileInfo file in Model[1])
 {
-    <div id="row">
-        <div id="fileName">@Html.ActionLink(file.Name, null, new { @path = ViewBag.path + file.Name })</div>
-        <div id="fileAttributes">
-            <div id="fileSize">@www.Core.Utility.FileSize(file.Length)</div><div id="fileModified">@file.LastWriteTime</div>
+    <div class="clsRow clsFileRow" id="row">
+        <div class="clsFileName">@Html.ActionLink(file.Name, null, new { @path = ViewBag.path + file.Name })</div>
+        <div class="clsFileAttributes">
+            <div class="clsFileSize">@www.Core.Utility.FileSize(file.Length)</div><div class="clsFileModified">@file.LastWriteTime</div>
         </div>
     </div>
 }

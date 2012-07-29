@@ -110,9 +110,16 @@
     <Content Include="Content\folder.png" />
     <Content Include="Content\folder_add.png" />
     <Content Include="Content\GreaterThan.png" />
+    <Content Include="Content\images\cut.png" />
+    <Content Include="Content\images\door.png" />
+    <Content Include="Content\images\page_white_copy.png" />
+    <Content Include="Content\images\page_white_delete.png" />
+    <Content Include="Content\images\page_white_edit.png" />
+    <Content Include="Content\images\page_white_paste.png" />
     <Content Include="Content\index.png" />
     <Content Include="Content\index_up.png" />
     <Content Include="Content\default.jpg" />
+    <Content Include="Content\jquery.contextMenu.css" />
     <Content Include="Content\psTEM_logo.png" />
     <Content Include="Content\signin.png" />
     <Content Include="Content\Site.css" />
@@ -153,6 +160,7 @@
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.contextMenu.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

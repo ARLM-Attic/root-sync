@@ -2,6 +2,22 @@
     ViewBag.Title = "Files";
 }
 
+<link rel="Stylesheet" href="../../Content/jquery.contextMenu.css"  />
+<script src="../../Scripts/jquery.contextMenu.js"></script>
+@section bodytop {
+<ul id="mnuFolder" class="contextMenu">
+    <li class="edit"><a href="#open">Open</a></li>
+    <li class="edit"><a href="#delete">Delete</a></li>
+</ul>
+<ul id="mnuFile" class="contextMenu">
+    <li class="edit"><a href="#open">Open</a></li>
+    <li class="edit"><a href="#delete">Delete</a></li>
+    <li class="edit"><a href="#download">Download</a></li>
+    <li class="edit"><a href="#rename">Rename</a></li>
+    <li class="edit"><a href="#unopen">Mark as Unopened</a></li>
+</ul>
+}
+
 <script type="text/javascript">
     $.ajaxSetup({ cache: false });
     $(document).ready(function () {
@@ -33,12 +49,23 @@
             e.preventDefault();
             $(this).closest(".dialog").dialog("close");
         });
+
+        //Register context menus
+        $('.clsFolderRow:has(.clsFolderName)').contextMenu({
+            menu: 'mnuFolder'
+        },
+            function (action, element, position) {
+                alert('action ' + action + ' element ' + element + ' position ' + position);
+            });
+        $('.clsFileRow:has(.clsFileName)').contextMenu({
+            menu: 'mnuFile'
+        },
+            function (action, element, position) {
+                alert('action ' + action + ' element ' + element + ' position ' + position);
+        });
+
     });
     </script>
-
-
-
-
 
     <div id="MenuRow">
         <div id="MenuIcon">
@@ -79,7 +106,7 @@
     <div id="HeaderRow">
         <div id="HeaderName">Name</div>
         <div id="HeaderAttributes">
-            <div id="fileSize">Size</div><div id="fileModified">Last Modified</div>
+            <div class="clsFileSize">Size</div><div class="clsFileModified">Last Modified</div>
         </div>
     </div>
 
