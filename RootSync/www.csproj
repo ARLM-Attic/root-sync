@@ -102,10 +102,8 @@
     </Content>
     <Content Include="Content\ajax-loader.gif" />
     <Content Include="Content\banner.png" />
-    <Content Include="Content\BigFixAdmin_logo.png" />
     <Content Include="Content\blank.png" />
     <Content Include="Content\components.png" />
-    <Content Include="Content\Copy of banner.png" />
     <Content Include="Content\document_up.png" />
     <Content Include="Content\file.png" />
     <Content Include="Content\folder.png" />
@@ -121,7 +119,6 @@
     <Content Include="Content\index_up.png" />
     <Content Include="Content\default.jpg" />
     <Content Include="Content\jquery.contextMenu.css" />
-    <Content Include="Content\psTEM_logo.png" />
     <Content Include="Content\signin.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -154,7 +151,6 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Content\toolbox.png" />
     <Content Include="Content\window_earth.png" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Files.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
