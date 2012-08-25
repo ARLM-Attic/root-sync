@@ -1,9 +1,11 @@
-﻿@{
+﻿@model www.Models.FilesModel
+@{
     ViewBag.Title = "Files";
 }
 
 <link rel="Stylesheet" href="../../Content/jquery.contextMenu.css"  />
 <script src="../../Scripts/jquery.contextMenu.js"></script>
+<script src="../../Scripts/Files.js"></script>
 @section bodytop {
 <ul id="mnuFolder" class="contextMenu">
     <li class="edit"><a href="#open">Open</a></li>
@@ -18,74 +20,9 @@
 </ul>
 }
 
-<script type="text/javascript">
-    $.ajaxSetup({ cache: false });
-    $(document).ready(function () {
-
-        //        var x = $(signin).position().left;
-        //        var y = $(signin).position().top + $(signin).height() * 2;
-
-        $(".openDialog").live("click", function (e) {
-            e.preventDefault();
-
-            var newDiv = $("<div></div>");
-            newDiv.addClass("dialog");
-            newDiv.attr("id", $(this).data("data_dialog_id"));
-            newDiv.appendTo($('body')); // is error really here? 
-            newDiv.dialog({
-                title: $(this).attr("data_dialog_title"),
-                draggable: false,
-                bgiframe: true,
-                modal: true,
-                closeOnEscape: true,
-                resizable: false,
-                close: function () {
-                    $(this).remove()
-                }
-            }).load(this.href);
-        });
-
-        $(".close").live("click", function (e) {
-            e.preventDefault();
-            $(this).closest(".dialog").dialog("close");
-        });
-
-        //Register context menus
-        $('.clsFolderRow:has(.clsFolderName)').contextMenu({
-            menu: 'mnuFolder'
-        },
-            function (action, element, position) {
-                alert('action ' + action + ' element ' + element + ' position ' + position);
-            });
-        $('.clsFileRow:has(.clsFileName)').contextMenu({
-            menu: 'mnuFile'
-        },
-            function (action, element, position) {
-                alert('action ' + action + ' element ' + element + ' position ' + position);
-            });
-
-        $('.clsFileRow').draggable({ helper: 'clone' })
-                        .click(function () {
-                            if ($(this).is('.ui-draggable-dragging')) {
-                                return false; //don't download file
-                            }
-                            //alert($(this).find('a').first().data('fileurl'));
-
-                            //$('.ui-draggable-dragging').draggable('option', 'revert', true).trigger('mouseup');
-                            $(this).draggable('option', 'revert', true).trigger('mouseup');
-                            return true; //download the file (or perform default action)
-                        });
-        $('.clsFolderRow').droppable({
-            drop: function (event, ui) {
-                var sourceFile = ui.draggable.find('a').first().data('fileurl');
-                var destFolder = $(this).find('.clsFolderName a').first().attr('href');
-                alert('codeme: move from ' + sourceFile + ' to ' + destFolder);
-
-            }
-        });
-
-    });
-    </script>
+<div style="display:none;" id="divInputDialog">
+    <span id="spnInputLabel"></span><input type="text" id="txtInputText" value="" />
+</div>
 
     <div id="MenuRow">
         <div id="MenuIcon">
@@ -112,12 +49,13 @@
 
         <div id="MenuOptions">
             <div id="UploadFileButton">
-                <a class="openDialog" data_dialog_id="newfolderDialog" data_dialog_title="Upload File" href="/FileActions/UploadFile?path=@ViewBag.path.Replace(" ", "%20")">
-                    <img src="@Url.Content("~/Content/document_up.png")" border="0" /></a>
+            @*/FileActions/UploadFile?path=@ViewBag.path.Replace(" ", "%20")*@
+                <a href="javascript:uploadFile()"><img src="@Url.Content("~/Content/document_up.png")" border="0" /></a>
             </div>
             <div id="NewFolderButton">
-                <a class="openDialog" data_dialog_id="createDialog" data_dialog_title="New Folder" href="/FileActions/NewFolder?path=@ViewBag.path.Replace(" ", "%20")">
-                    <img src="@Url.Content("~/Content/folder_add.png")" border="0" /></a>
+            @* /FileActions/NewFolder?path=@ViewBag.path.Replace(" ", "%20") *@
+                @*<a class="openDialog" data_dialog_id="createDialog" data_dialog_title="New Folder" href="">*@
+                <a href="javascript:newFolder()"><img src="@Url.Content("~/Content/folder_add.png")" border="0" /></a>
             </div>
         </div>
     </div>
@@ -131,5 +69,5 @@
     </div>
 
     <div id="_index">
-    @Html.Partial("_Index")
+    @Html.Partial("DirectoryList", Model)
     </div>

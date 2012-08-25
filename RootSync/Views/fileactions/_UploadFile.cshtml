@@ -81,10 +81,7 @@
     
         <p><center>
             <input type="submit" value="Ok" />
-            @if (Request.IsAjaxRequest())
-            {
-                <input type="button" value="Cancel" onclick="$(this).closest('.dialog').dialog('close');" />
-            }
+            <input type="button" value="Cancel" onclick="$(this).closest('.dialog').dialog('close');" />
         </center></p>
     
         <input id="path-to-save" type="hidden" name="path" value="@ViewBag.path" />           

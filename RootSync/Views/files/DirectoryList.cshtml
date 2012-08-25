@@ -1,0 +1,33 @@
+﻿@model www.Models.FilesModel
+@{
+    Layout = null;
+}
+
+@if (Model.RelativePath != "" && Model.RelativePath != "/") {
+    <div class="clsRow clsFolderRow clsParentDirectory">
+        <div class="clsFolderName">
+            <a class="lnkFileName" href="javascript:openFolder('..')">..</a>
+        </div>
+    </div>
+}
+
+@foreach (DirectoryInfo dir in Model.Directories)
+{
+    <div class="clsRow clsFolderRow">
+        <div class="clsFolderName">
+            <a class="lnkFileName" href="javascript:openFolder('@(ViewBag.path + dir.Name)')">@dir.Name</a>
+        </div>
+    </div>
+}
+
+
+@foreach (FileInfo file in Model.Files)
+{ 
+    <div class="clsRow clsFileRow" id="row">
+        <div class="clsFileName"><a class="lnkFileName" data-fileurl="@Url.Action(file.Name)" href="@Url.Action(Model.RelativePath + file.Name)">@file.Name</a></div>
+        <div class="clsFileAttributes">
+            <div class="clsFileSize">@www.Core.Utility.FileSize(file.Length)</div><div class="clsFileModified">@file.LastWriteTime</div>
+        </div>
+    </div>
+    @*Html.ActionLink(file.Name, null, new { @path = ViewBag.path + file.Name })*@
+}

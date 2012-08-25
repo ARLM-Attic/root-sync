@@ -72,14 +72,12 @@ namespace www.Controllers
         [HttpPost]
         public ActionResult SignIn(signinModel model)
         {
-            Thread.Sleep(500); // Fake processing time
-
             if (!ModelState.IsValid)
             {
-                if (Request.IsAjaxRequest())
-                    return PartialView("_signin", model);
-
-                return View(model);
+                return Json(new {
+                    status = "failure",
+                    responseHTML = this.RenderPartialViewToString("_SignIn", model)
+                });
             }
 
             //if (model.Username == "daniel" && model.Password == "1234") //simulate data store call where username/password exists
@@ -98,14 +96,19 @@ namespace www.Controllers
             {
                 FormsAuthentication.SetAuthCookie(UserID.ToString(), true); //false = cookie destroyed by closing browser window
 
-                if (!Request.Path.ToLower().Contains("signin"))
-                    return JavaScript("location.reload(true)");
-                else return JavaScript("window.location = '" + Request.Url.ToString().ToLower().Replace("/signin", "") + "'");
+                return Json(new { status = "success", responseHTML = "" });
+
+                //if (!Request.Path.ToLower().Contains("signin"))
+                //    return JavaScript("location.reload(true)");
+                //else return JavaScript("window.location = '" + Request.Url.ToString().ToLower().Replace("/signin", "") + "'");
             }
             else
             {
                 ModelState.AddModelError("Password", "Invalid username or password");
-                return Json(new object[] { true, this.RenderPartialViewToString("_failure", model) });
+                return Json(new {
+                    status = "failure",
+                    responseHTML = this.RenderPartialViewToString("_SignIn", model)
+                });
             }
         }
 
@@ -132,15 +135,10 @@ namespace www.Controllers
         {
             if (!ModelState.IsValid)
             {
-                if (Request.IsAjaxRequest()) {
-                    return Json(new {
-                        status = "failure",
-                        responseHTML = this.RenderPartialViewToString("_register", model)
-                    });
-                } else {
-                    //return PartialView("_register", model);
-                    return View(model);
-                }
+                return Json(new {
+                    status = "failure",
+                    responseHTML = this.RenderPartialViewToString("_register", model)
+                });
             }
 
 

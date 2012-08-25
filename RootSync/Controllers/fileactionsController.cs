@@ -12,6 +12,77 @@ namespace www.Controllers
 {
     public class fileactionsController : Controller
     {
+        public string RootPath {
+            get {
+                return ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
+            }
+        }
+
+        private string GetParentDirectory(string path, int parentCount) {
+            if (string.IsNullOrEmpty(path) || parentCount < 1)
+                return path;
+
+            string parent = System.IO.Path.GetDirectoryName(path);
+
+            if (--parentCount > 0)
+                return GetParentDirectory(parent, parentCount);
+
+            return parent;
+        }
+
+        public ActionResult GetDirectoryList(string path) {
+            string FTPPath = RootPath;
+            string foldername = Request["foldername"];
+
+            if (foldername == "..") {
+                path = path.Substring(0, path.Length - 2);
+                //Remove the last folder
+                path = GetParentDirectory(path, 1);
+            }
+
+            if (System.IO.Directory.Exists(FTPPath + path)) { FTPPath += path; }
+            
+
+            IEnumerable<DirectoryInfo> dirs = SafeWalk.EnumerateDirectoriesSafe(new DirectoryInfo(FTPPath));
+            IEnumerable<FileInfo> files = SafeWalk.EnumerateFilesSafe(new DirectoryInfo(FTPPath));
+
+
+            if (FTPPath == RootPath) {
+                ViewBag.path = "";
+                ViewBag.FolderName = " Home";
+                ViewBag.ParentPath = "";
+            } else {
+                if (!FTPPath.EndsWith("/")) FTPPath += "/";
+
+
+                ViewBag.path = FTPPath.Replace(RootPath, "");
+
+                ViewBag.ShowGT = true;
+                string[] p = ViewBag.path.Split('/');
+                ViewBag.FolderName = p[p.Length - 2];
+                string parentpath = "";
+                for (int i = 0; i < p.Length - 2; i++) {
+                    parentpath += p[i] + "/";
+                }
+                ViewBag.ParentPath = parentpath.TrimEnd('/');
+
+            }
+
+
+            string relativePath = (path ?? "").EndsWith("/") ? path : path + "/";
+
+            return View("~/Views/files/DirectoryList.cshtml", new FilesModel() { Directories = dirs, Files = files, RelativePath = relativePath });
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult Rename(FormCollection formValues) {
+
+            string srcFile = formValues["source"];
+            string destFile = formValues["destination"];
+            return Json("rename " + srcFile + " to " + destFile);
+        }
+
+
         //
         // GET: /files/
 
@@ -179,8 +250,6 @@ namespace www.Controllers
         [HttpPost]
         public ActionResult NewFolder(newfolderModel model, string path)
         {
-            Thread.Sleep(500); // Fake processing time
-
             if (!ModelState.IsValid)
             {
                 if (Request.IsAjaxRequest())
@@ -213,16 +282,19 @@ namespace www.Controllers
 
                 //string location = string.Format("window.location = '{0}://{1}/fileactions/?path={2}", Request.Url.Scheme, Request.Url.Authority, path);
                 string location = Request.Url.ToString().ToLower().Replace("/newfolder", "?path=" + path);
-                return JavaScript("window.location = '" + location + "'");
+                //return JavaScript("window.location = '" + location + "'");
+                return Json(new { status = "success" });
 
             }
-            catch 
+            catch (Exception ex)
             {
+                return Json(new { status = "failure", responseHTML = this.RenderPartialViewToString("~/Views/Error/AjaxError.cshtml", ex)});
                 //ModelState.AddModelError("Password", "Invalid username or password");
                 //return Json(new object[] { true, this.RenderPartialViewToString("_failure", model) });
             }
 
-            return JavaScript("location.reload(true)");
+            //return JavaScript("location.reload(true)");
+            
         }
 
 

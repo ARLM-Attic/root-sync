@@ -5,14 +5,21 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using System.Configuration;
+using www.Models;
 
 namespace www.Controllers
 {
     public class filesController : Controller
     {
+
+        public string RootPath {
+            get {
+                return ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
+            }
+        }
+
         //
         // GET: /files/
-
 
         public ActionResult Index(string path)
         {
@@ -22,9 +29,7 @@ namespace www.Controllers
             {
                 ViewBag.ShowGT = false;
                 
-
-                string rootpath = ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
-                string FTPPath = rootpath;
+                string FTPPath = RootPath;
 
                 //first validate this user's folder exists, if not, we need to create it.
                 if (!System.IO.Directory.Exists(FTPPath))
@@ -60,7 +65,7 @@ namespace www.Controllers
                     IEnumerable<FileInfo> files = SafeWalk.EnumerateFilesSafe(new DirectoryInfo(FTPPath));
 
                    
-                    if (FTPPath == rootpath)
+                    if (FTPPath == RootPath)
                     {
                         ViewBag.path = "";
                         ViewBag.FolderName = " Home";
@@ -71,7 +76,7 @@ namespace www.Controllers
                         if (!FTPPath.EndsWith("/")) FTPPath += "/";
 
 
-                        ViewBag.path = FTPPath.Replace(rootpath,"");
+                        ViewBag.path = FTPPath.Replace(RootPath,"");
 
                         ViewBag.ShowGT = true;
                         string[] p = ViewBag.path.Split('/');
@@ -86,7 +91,9 @@ namespace www.Controllers
                     }
 
 
-                    return View(new object[] { dirs, files });
+                    string relativePath = (path ?? "").EndsWith("/") ? path : path + "/";
+
+                    return View(new FilesModel() { Directories = dirs, Files = files, RelativePath = relativePath });
                 }
             }
             catch (DirectoryNotFoundException exp)
