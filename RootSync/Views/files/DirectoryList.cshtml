@@ -3,7 +3,7 @@
     Layout = null;
 }
 @if (Model.RelativePath != "" && Model.RelativePath != "/") {
-    <div class="clsRow clsFolderRow clsParentDirectory" onclick="rootsync.files.openFolder('..')">
+    <div class="clsRow clsFolderRow clsParentDirectory clearfix" onclick="rootsync.files.openFolder('..')">
         <div class="clsFolderName">
             <a class="lnkFileName" href="javascript:$.noop()">..</a>
         </div>
@@ -11,7 +11,7 @@
 }
 @foreach (DirectoryInfo dir in Model.Directories)
 {
-    <div style="display:block; overflow: hidden;" class="clsRow clsFolderRow clearfix">
+    <div class="clsRow clsFolderRow clearfix">
         <div style="float:left; width: auto; border-right: 1px #EDF1F5 solid; padding-right: 8px;">
             <input class="clsFolderCheckbox" type="checkbox" style="vertical-align:middle;" />
         </div>
@@ -23,7 +23,7 @@
     </div>
 }
 @foreach (FileInfo file in Model.Files) { 
-    <div style="display:block;" class="clsRow clsFileRow">
+    <div style="display:block;" class="clsRow clsFileRow clearfix">
         <span class="spnFileRowCheckbox" style="border-right: 1px #EDF1F5 solid; padding-right: 8px;">
             <input class="clsFileCheckbox" style="vertical-align: middle;" type="checkbox" />
         </span>
