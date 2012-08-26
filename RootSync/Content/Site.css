@@ -406,9 +406,8 @@ first child of the left and right table columns */
 
 .clsFileAttributes
 {
-    position:relative;
+	padding: 8px;
     float:right;
-    top:-23px;
     width:280px;
 }
 

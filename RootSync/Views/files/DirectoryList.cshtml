@@ -25,8 +25,9 @@
 @foreach (FileInfo file in Model.Files)
 { 
     <div class="clsRow clsFileRow" id="row">
-        <div class="clsFileName"><a class="lnkFileName" data-fileurl="@Url.Action(file.Name)" href="@Url.Action(Model.RelativePath + file.Name)">@file.Name</a></div>
-        <div class="clsFileAttributes">
+        <div style="display:inline-block;"><input type="checkbox" /></div>
+        <div style="display:inline-block;" class="clsFileName"><a class="lnkFileName" data-fileurl="@Url.Action(file.Name)" href="@Url.Action(Model.RelativePath + file.Name)">@file.Name</a></div>
+        <div style="display:inline-block;" class="clsFileAttributes">
             <div class="clsFileSize">@www.Core.Utility.FileSize(file.Length)</div><div class="clsFileModified">@file.LastWriteTime</div>
         </div>
     </div>
