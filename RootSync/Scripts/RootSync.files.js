@@ -102,7 +102,7 @@
 
     var relativePath = "/";
 
-    files.openFolder = function (fpath) {
+    var openFolder = files.openFolder = function (fpath) {
         if (fpath === '..') {
             relativePath = rootsync.getParentDirectory(relativePath);
         } else {
@@ -118,7 +118,7 @@
         refreshDirectory(relativePath);
     };
 
-    files.refreshDirectory = function (rpath) {
+    var refreshDirectory = files.refreshDirectory = function (rpath) {
         $.ajax({ url: "/fileactions/GetDirectoryList",
             data: { "path": rpath },
             success: function (msg) {

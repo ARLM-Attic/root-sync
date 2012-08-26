@@ -394,8 +394,7 @@ first child of the left and right table columns */
     background-image: url('file.png');
     background-position:left center;
     background-repeat: no-repeat;
-    padding:8px;
-    padding-left:35px;
+    padding: 8px 8px 8px 35px;
 }
 
 .clsFileName a:link
@@ -421,11 +420,6 @@ first child of the left and right table columns */
    width:75px;
 }
 
-.clsFileModified
-{
-   
-}
-
 .jqButton 
 {
 	padding-top: 10px;
@@ -442,7 +436,49 @@ first child of the left and right table columns */
 }
 
 
+.clsFileRow 
+{
+}
 
+.fileRowAnchor
+{
+    text-decoration:none; display:block; color:inherit;
+}
+/* Remove color styling for this anchor */
+.fileRowAnchor:visited 
+{
+    color:inherit;
+}
+.fileRowAnchor:link 
+{
+    color:inherit;
+}
+.fileRowAnchor:hover 
+{
+    color:inherit;
+}
+.spnFileRowCheckbox 
+{
+    display:inline-block; float: left; 
+}
+.spnFileName 
+{
+    display:inline-block;
+}
+    
+.spnFileRowAttributes 
+{
+    display:inline-block; float:right; width: 280px; padding: 8px;
+}
+    
+.spnFileSize 
+{
+    display:block; float: left;
+}
+.spnFileModified 
+{
+    display:block;
+}
 
 
 

@@ -2,34 +2,44 @@
 @{
     Layout = null;
 }
-
 @if (Model.RelativePath != "" && Model.RelativePath != "/") {
-    <div class="clsRow clsFolderRow clsParentDirectory">
+    <div class="clsRow clsFolderRow clsParentDirectory" onclick="rootsync.files.openFolder('..')">
         <div class="clsFolderName">
-            <a class="lnkFileName" href="javascript:openFolder('..')">..</a>
+            <a class="lnkFileName" href="javascript:$.noop()">..</a>
         </div>
     </div>
 }
-
 @foreach (DirectoryInfo dir in Model.Directories)
 {
-    <div class="clsRow clsFolderRow">
-        <div style="display:inline-block;"><input class="clsFolderCheckbox" type="checkbox" /></div>
-        <div class="clsFolderName" style="display:inline-block;">
-            <a class="lnkFileName" href="javascript:openFolder('@(ViewBag.path + dir.Name)')">@dir.Name</a>
+    <div style="display:block; overflow: hidden;" class="clsRow clsFolderRow clearfix">
+        <div style="float:left; width: auto; border-right: 1px #EDF1F5 solid; padding-right: 8px;">
+            <input class="clsFolderCheckbox" type="checkbox" style="vertical-align:middle;" />
+        </div>
+        <div style="overflow: hidden;" onclick="rootsync.files.openFolder('@(ViewBag.path + dir.Name)')">
+            <div class="clsFolderName" style="width: 100%;">
+                <a class="lnkFileName" href="javascript:$.noop()">@dir.Name</a>
+            </div>
         </div>
     </div>
 }
-
-
-@foreach (FileInfo file in Model.Files)
-{ 
-    <div class="clsRow clsFileRow" id="row">
-        <div style="display:inline-block;"><input class="clsFileCheckbox" type="checkbox" /></div>
-        <div style="display:inline-block;" class="clsFileName"><a class="lnkFileName" data-fileurl="@Url.Action(file.Name)" href="@Url.Action(Model.RelativePath + file.Name)">@file.Name</a></div>
-        <div style="display:inline-block;" class="clsFileAttributes">
-            <div class="clsFileSize">@www.Core.Utility.FileSize(file.Length)</div><div class="clsFileModified">@file.LastWriteTime</div>
-        </div>
+@foreach (FileInfo file in Model.Files) { 
+    <div style="display:block;" class="clsRow clsFileRow">
+        <span class="spnFileRowCheckbox" style="border-right: 1px #EDF1F5 solid; padding-right: 8px;">
+            <input class="clsFileCheckbox" style="vertical-align: middle;" type="checkbox" />
+        </span>
+        <a class="fileRowAnchor" style="" href="@Url.Action(Model.RelativePath + file.Name)" data-fileurl="@Url.Action(file.Name)">
+            <span style="" class="spnFileName clsFileName">
+                @file.Name
+            </span>
+            <span class="spnFileRowAttributes">
+                <span class="spnFileSize clsFileSize">
+                    @www.Core.Utility.FileSize(file.Length)
+                </span>
+                <span class="spnFileModified">
+                    @file.LastWriteTime
+                </span>
+            </span>
+        </a>
     </div>
     @*Html.ActionLink(file.Name, null, new { @path = ViewBag.path + file.Name })*@
 }
