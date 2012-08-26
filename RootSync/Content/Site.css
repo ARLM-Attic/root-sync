@@ -328,8 +328,8 @@ first child of the left and right table columns */
 
 #HeaderName
 {
-    padding:8px;
-    padding-left:35px;
+    /* padding:8px; */
+    padding:  8px 8px 8px 0px;
     width:350px;
     font-size:small;
     color:#2281D2;

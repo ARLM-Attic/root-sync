@@ -14,7 +14,8 @@
 @foreach (DirectoryInfo dir in Model.Directories)
 {
     <div class="clsRow clsFolderRow">
-        <div class="clsFolderName">
+        <div style="display:inline-block;"><input type="checkbox" /></div>
+        <div class="clsFolderName" style="display:inline-block;">
             <a class="lnkFileName" href="javascript:openFolder('@(ViewBag.path + dir.Name)')">@dir.Name</a>
         </div>
     </div>
