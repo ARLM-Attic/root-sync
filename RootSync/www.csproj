@@ -152,7 +152,7 @@
     <Content Include="Content\toolbox.png" />
     <Content Include="Content\window_earth.png" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\Files.js" />
+    <Content Include="Scripts\RootSync.files.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />

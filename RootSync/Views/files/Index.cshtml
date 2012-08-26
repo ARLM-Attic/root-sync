@@ -5,7 +5,7 @@
 
 <link rel="Stylesheet" href="../../Content/jquery.contextMenu.css"  />
 <script src="../../Scripts/jquery.contextMenu.js"></script>
-<script src="../../Scripts/Files.js"></script>
+<script src="../../Scripts/RootSync.files.js"></script>
 @section bodytop {
 <ul id="mnuFolder" class="contextMenu">
     <li class="edit"><a href="#open">Open</a></li>
@@ -50,19 +50,17 @@
         <div id="MenuOptions">
             <div id="UploadFileButton">
             @*/FileActions/UploadFile?path=@ViewBag.path.Replace(" ", "%20")*@
-                <a href="javascript:uploadFile()"><img src="@Url.Content("~/Content/document_up.png")" border="0" /></a>
+                <a href="javascript:rootsync.files.uploadFile()"><img src="@Url.Content("~/Content/document_up.png")" border="0" /></a>
             </div>
             <div id="NewFolderButton">
             @* /FileActions/NewFolder?path=@ViewBag.path.Replace(" ", "%20") *@
                 @*<a class="openDialog" data_dialog_id="createDialog" data_dialog_title="New Folder" href="">*@
-                <a href="javascript:newFolder()"><img src="@Url.Content("~/Content/folder_add.png")" border="0" /></a>
+                <a href="javascript:rootsync.files.newFolder()"><img src="@Url.Content("~/Content/folder_add.png")" border="0" /></a>
             </div>
         </div>
     </div>
-
-
     <div id="HeaderRow">
-        <div id="HeaderName"><input type="checkbox" /><span style="padding-left: 8px;">Name</span></div>
+        <div id="HeaderName"><input type="checkbox" id="cbHeader" name="cbHeader" onclick="rootsync.files.cbHeader_OnClick(this)" /><span style="padding-left: 8px;">Name</span></div>
         <div id="HeaderAttributes">
             <div class="clsFileSize">Size</div><div class="clsFileModified">Last Modified</div>
         </div>

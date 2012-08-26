@@ -14,7 +14,7 @@
 @foreach (DirectoryInfo dir in Model.Directories)
 {
     <div class="clsRow clsFolderRow">
-        <div style="display:inline-block;"><input type="checkbox" /></div>
+        <div style="display:inline-block;"><input class="clsFolderCheckbox" type="checkbox" /></div>
         <div class="clsFolderName" style="display:inline-block;">
             <a class="lnkFileName" href="javascript:openFolder('@(ViewBag.path + dir.Name)')">@dir.Name</a>
         </div>
@@ -25,7 +25,7 @@
 @foreach (FileInfo file in Model.Files)
 { 
     <div class="clsRow clsFileRow" id="row">
-        <div style="display:inline-block;"><input type="checkbox" /></div>
+        <div style="display:inline-block;"><input class="clsFileCheckbox" type="checkbox" /></div>
         <div style="display:inline-block;" class="clsFileName"><a class="lnkFileName" data-fileurl="@Url.Action(file.Name)" href="@Url.Action(Model.RelativePath + file.Name)">@file.Name</a></div>
         <div style="display:inline-block;" class="clsFileAttributes">
             <div class="clsFileSize">@www.Core.Utility.FileSize(file.Length)</div><div class="clsFileModified">@file.LastWriteTime</div>
