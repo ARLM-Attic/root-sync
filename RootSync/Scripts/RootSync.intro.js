@@ -58,6 +58,8 @@
                             //This works because jQuery will strip the parent (the form)
                             //If we replace the form we have, we'll lose our subscription to events.
                             $('#frmRegister').html($(result.responseHTML).html());
+                        } else if (result.status === "error") {
+                            $(result.responseHTML).dialog();
                         } else {
                             window.location.href = intro.filesAction;
                         }
