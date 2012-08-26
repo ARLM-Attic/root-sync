@@ -138,7 +138,7 @@ var newFolder = function () {
     },
     function () {
     });
-    return false;
+    
 };
 
 var uploadFile = function () {
