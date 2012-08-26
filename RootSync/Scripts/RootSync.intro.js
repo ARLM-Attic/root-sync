@@ -12,9 +12,6 @@
             intro.registerDialog.dialog('close');
         }
     };
-    intro.signin_signin_OnClick = function () {
-        alert('signin');
-    };
     intro.signin_cancel_OnClick = function () {
         if (intro.signInDialog) {
             intro.signInDialog.dialog('close');
@@ -33,6 +30,8 @@
                             //This works because jQuery will strip the parent (the form)
                             //If we replace the form we have, we'll lose our subscription to events.
                             $('#frmSignIn').html($(result.responseHTML).html());
+                        } else if (result.status === "error") {
+                            $(result.responseHTML).dialog();
                         } else {
                             window.location.href = intro.filesAction;
                         }
