@@ -244,9 +244,8 @@ first child of the left and right table columns */
 #MenuRow
 {
     height:25px;
-    padding:5px;
+    padding:10px;
     padding-left:0px;
-    font-size:large;
 }
 
 #MenuIcon
@@ -265,18 +264,23 @@ first child of the left and right table columns */
 {
     position:inherit;
     padding:3px;
+    font-size:large;
+    display:inline;
 }
 
 #MenuOptions
 {
-    position:relative;
     float:right;
-    top:-23px;
-    width:300px;
     text-align:right;
+    display:inline;
 }
 
 #UploadFileButton
+{
+	width: 300px;
+}
+
+/*#UploadFileButton
 {
     position: absolute;
     top: 0px;
@@ -305,7 +309,7 @@ first child of the left and right table columns */
 #NewFolderButton:Hover
 {
     background-color:#efefef;
-}
+}*/
 
 /* TOP MENU ROW */
 
@@ -422,7 +426,20 @@ first child of the left and right table columns */
    
 }
 
+.jqButton 
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
 
+.clearfix:after 
+{
+	content: ".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
 
 
 

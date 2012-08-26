@@ -44,7 +44,7 @@
         registerMouseActions();
     });
 
-    files.registerMouseActions = function () {
+    var registerMouseActions = files.registerMouseActions = function () {
         //Register context menus
         $('.clsFolderRow:has(.clsFolderName)').not('.clsParentDirectory').contextMenu({
             menu: 'mnuFolder'

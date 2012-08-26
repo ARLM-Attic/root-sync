@@ -2,6 +2,11 @@
 /// <reference path="jquery.validate-vsdoc.js" />
 
 $.ajaxSetup({ cache: false });
+
+$(function () {
+    $('.jqButton').button();
+});
+
 (function (context, undefined) {
     var rootsync = context.rootsync = context.rootsync || {};
 

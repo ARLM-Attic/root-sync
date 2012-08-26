@@ -47,16 +47,12 @@
         <div id="MenuLocation">@ViewBag.FolderName</div>
 
 
-        <div id="MenuOptions">
-            <div id="UploadFileButton">
+        <div id="MenuOptions" class="clearFix">
             @*/FileActions/UploadFile?path=@ViewBag.path.Replace(" ", "%20")*@
-                <a href="javascript:rootsync.files.uploadFile()"><img src="@Url.Content("~/Content/document_up.png")" border="0" /></a>
-            </div>
-            <div id="NewFolderButton">
+                <button class="jqButton" onclick="rootsync.files.uploadFile()">Upload File</button>
             @* /FileActions/NewFolder?path=@ViewBag.path.Replace(" ", "%20") *@
                 @*<a class="openDialog" data_dialog_id="createDialog" data_dialog_title="New Folder" href="">*@
-                <a href="javascript:rootsync.files.newFolder()"><img src="@Url.Content("~/Content/folder_add.png")" border="0" /></a>
-            </div>
+                <button class="jqButton" onclick="rootsync.files.newFolder()">New Folder</button>
         </div>
     </div>
     <div id="HeaderRow">
