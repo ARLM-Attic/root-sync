@@ -23,8 +23,6 @@ namespace www.Controllers
 
         public ActionResult Index(string path)
         {
-           string url = Request.Url.ToString();
-           
             try
             {
                 ViewBag.ShowGT = false;

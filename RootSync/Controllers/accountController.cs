@@ -26,9 +26,9 @@ namespace www.Controllers
 
         public ActionResult Edit()
         {
-            Int32 userId = Int32.Parse(User.Identity.Name);
+            Guid guid = Guid.Parse(User.Identity.Name);
 
-            accountModel model = DataAccess.DAL.retAccount(userId);
+            accountModel model = DataAccess.DAL.retAccount(guid);
 
             return View(model);
         }
@@ -37,10 +37,10 @@ namespace www.Controllers
 
         public ActionResult Update(accountModel model)
         {
-            Int32 userId = Int32.Parse(User.Identity.Name);
+            Guid guid = Guid.Parse(User.Identity.Name);
 
             try {
-                DataAccess.DAL.UpdateAccount(userId, model);
+                DataAccess.DAL.UpdateAccount(guid, model);
                 ViewBag.Message = "Successfully Updated!";
             } catch (Exception ex) {
                 ModelState.AddModelError("", "Failure to save profile!");
@@ -81,20 +81,20 @@ namespace www.Controllers
             }
 
             //if (model.Username == "daniel" && model.Password == "1234") //simulate data store call where username/password exists
-            Int32 UserID = -1;
+            Guid guid = Guid.Empty;
 
             try
             {
-                UserID = DataAccess.DAL.UserIsValid(model.Username, model.Password, true);
+                guid = DataAccess.DAL.UserIsValid(model.Username, model.Password, true);
             }
             catch (Exception ex)
             {
 
             }
 
-            if (UserID != -1)
+            if (guid != Guid.Empty)
             {
-                FormsAuthentication.SetAuthCookie(UserID.ToString(), true); //false = cookie destroyed by closing browser window
+                FormsAuthentication.SetAuthCookie(guid.ToString(), true); //false = cookie destroyed by closing browser window
 
                 return Json(new { status = "success", responseHTML = "" });
 
@@ -142,10 +142,10 @@ namespace www.Controllers
             }
 
 
-            Int32 UserID = -1;
+            Guid guid = Guid.Empty;
             try
             {
-                UserID = DataAccess.DAL.RegisterAccount(model.First, model.Last, model.Username, model.Password);
+                guid = DataAccess.DAL.RegisterAccount(model.First, model.Last, model.Username, model.Password);
             }
             catch (Exception ex) {
                 if (Request.IsAjaxRequest()) {
@@ -156,12 +156,13 @@ namespace www.Controllers
                 }
             }
 
-            if (UserID != -1) {
-                FormsAuthentication.SetAuthCookie(UserID.ToString(), true); //false = cookie destroyed by closing browser window
+            if (guid != Guid.Empty)
+            {
+                FormsAuthentication.SetAuthCookie(guid.ToString(), true); //false = cookie destroyed by closing browser window
 
                 //-----------------
                 //FILES - create ftp folder if it doesn't exist.
-                string FTPPath = ConfigurationManager.AppSettings["path"] + UserID + "/";
+                string FTPPath = ConfigurationManager.AppSettings["path"] + guid.ToString() + "/";
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);
                 //-----------------
 

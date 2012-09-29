@@ -1,0 +1,5 @@
+C:\Users\Daniel\Dropbox\Projects\RootSync\rootsync.Business\bin\Debug\rootsync.Business.dll
+C:\Users\Daniel\Dropbox\Projects\RootSync\rootsync.Business\bin\Debug\rootsync.Business.pdb
+C:\Users\Daniel\Dropbox\Projects\RootSync\rootsync.Business\obj\AlphaSQLServer\ResolveAssemblyReference.cache
+C:\Users\Daniel\Dropbox\Projects\RootSync\rootsync.Business\obj\AlphaSQLServer\rootsync.Business.dll
+C:\Users\Daniel\Dropbox\Projects\RootSync\rootsync.Business\obj\AlphaSQLServer\rootsync.Business.pdb

@@ -1,0 +1,5 @@
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\bin\Beta RootSync.com\www.Core.dll
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\bin\Beta RootSync.com\www.Core.pdb
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\Beta\ResolveAssemblyReference.cache
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\Beta\www.Core.dll
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\Beta\www.Core.pdb

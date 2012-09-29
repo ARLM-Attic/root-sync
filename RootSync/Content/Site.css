@@ -244,8 +244,9 @@ first child of the left and right table columns */
 #MenuRow
 {
     height:25px;
-    padding:10px;
+    padding:5px;
     padding-left:0px;
+    font-size:large;
 }
 
 #MenuIcon
@@ -264,23 +265,18 @@ first child of the left and right table columns */
 {
     position:inherit;
     padding:3px;
-    font-size:large;
-    display:inline;
 }
 
 #MenuOptions
 {
+    position:relative;
     float:right;
+    top:-23px;
+    width:300px;
     text-align:right;
-    display:inline;
 }
 
 #UploadFileButton
-{
-	width: 300px;
-}
-
-/*#UploadFileButton
 {
     position: absolute;
     top: 0px;
@@ -309,7 +305,7 @@ first child of the left and right table columns */
 #NewFolderButton:Hover
 {
     background-color:#efefef;
-}*/
+}
 
 /* TOP MENU ROW */
 
@@ -332,8 +328,8 @@ first child of the left and right table columns */
 
 #HeaderName
 {
-    /* padding:8px; */
-    padding:  8px 8px 8px 0px;
+    padding:8px;
+    padding-left:35px;
     width:350px;
     font-size:small;
     color:#2281D2;
@@ -394,7 +390,8 @@ first child of the left and right table columns */
     background-image: url('file.png');
     background-position:left center;
     background-repeat: no-repeat;
-    padding: 8px 8px 8px 35px;
+    padding:8px;
+    padding-left:35px;
 }
 
 .clsFileName a:link
@@ -409,8 +406,9 @@ first child of the left and right table columns */
 
 .clsFileAttributes
 {
-	padding: 8px;
+    position:relative;
     float:right;
+    top:-23px;
     width:280px;
 }
 
@@ -420,65 +418,15 @@ first child of the left and right table columns */
    width:75px;
 }
 
-.jqButton 
+.clsFileModified
 {
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.clearfix:after 
-{
-	content: ".";
-	display:block;
-	height:0;
-	clear:both;
-	visibility:hidden;
+   
 }
 
 
-.clsFileRow 
-{
-}
 
-.fileRowAnchor
-{
-    text-decoration:none; display:block; color:inherit;
-}
-/* Remove color styling for this anchor */
-.fileRowAnchor:visited 
-{
-    color:inherit;
-}
-.fileRowAnchor:link 
-{
-    color:inherit;
-}
-.fileRowAnchor:hover 
-{
-    color:inherit;
-}
-.spnFileRowCheckbox 
-{
-    display:inline-block; float: left; 
-}
-.spnFileName 
-{
-    display:inline-block;
-}
-    
-.spnFileRowAttributes 
-{
-    display:inline-block; float:right; width: 280px; padding: 8px;
-}
-    
-.spnFileSize 
-{
-    display:block; float: left;
-}
-.spnFileModified 
-{
-    display:block;
-}
+
+
 
 
 

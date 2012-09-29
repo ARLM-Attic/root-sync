@@ -21,7 +21,7 @@ namespace www.DataAccess
         /// <param name="Username">Users name/email in a string</param>
         /// <param name="Password">Users password in a string</param>
         /// <returns>UserID value from the database</returns>
-        public static int UserIsValid(string username, string password) {
+        public static Guid UserIsValid(string username, string password) {
             return UserIsValid(username, password, false);
         }
 
@@ -32,9 +32,9 @@ namespace www.DataAccess
         /// <param name="Password">Users password in a string</param>
         /// <param name="updateLastLogin">Whether to update the LastLogin column with DateTime.Now.</param>
         /// <returns>UserID value from the database</returns>
-        public static Int32 UserIsValid(string Username, string Password, bool updateLastLogin)
+        public static Guid UserIsValid(string Username, string Password, bool updateLastLogin)
         {
-            Int32 userID = -1;
+            Guid guid = Guid.Empty;
 
             string query = string.Format("SELECT UserID, Password FROM [User] WHERE Username = '{0}'", Username);
 
@@ -43,17 +43,16 @@ namespace www.DataAccess
 
                 User usr = context.Users.FirstOrDefault(u => u.Username == Username);
                 bool valid = Helper.VerifyHash(Password, "SHA512", usr.Password);
-                if (valid) { userID = usr.UserID; }
+                if (valid) { guid = usr.guid; }
 
                 if (usr != null && updateLastLogin) {
                     usr.LastLogin = DateTime.Now;
+                    usr.numLogins++;
                     context.SaveChanges();
                 }
-
-                context.Dispose();
             }
 
-            return userID;
+            return guid;
         }
 
         /// <summary>
@@ -64,30 +63,25 @@ namespace www.DataAccess
         /// <param name="Username">Desired username for this user as a string.</param>
         /// <param name="Password">Users chosen password as a string.</param>
         /// <returns>UserID from the database for this user.</returns>
-        public static Int32 RegisterAccount(string First, string Last, string Username, string Password)
+        public static Guid RegisterAccount(string First, string Last, string Username, string Password)
         {
-            Int32 UserID = -1;
                 
             string hash = Helper.ComputeHash(Password, "SHA512", null);
 
             using (RootSyncContext context = new RootSyncContext()) {
                 User usr = new User();
+                usr.guid = Guid.NewGuid();
                 usr.First = First;
                 usr.Last = Last;
                 usr.Username = Username;
                 usr.Password = hash;
                 usr.LastLogin = DateTime.Now;
+                usr.FirstLogin = DateTime.Now;
 
                 context.Users.Add(usr);
-
                 context.SaveChanges();
-
-                UserID = usr.UserID;
-
-                context.Dispose();
+                return usr.guid;
             }
-
-            return UserID;
         }
 
 
@@ -96,20 +90,18 @@ namespace www.DataAccess
         /// </summary>
         /// <param name="UserID">Database UserID to be retrieved</param>
         /// <returns>accountModel object with data for this user.</returns>
-        public static accountModel retAccount(Int32 UserID)
+        public static accountModel retAccount(Guid guid)
         {
             accountModel user = null;
 
             using (RootSyncContext context = new RootSyncContext()) {
-                User usr = context.Users.FirstOrDefault(u => u.UserID == UserID);
+                User usr = context.Users.FirstOrDefault(u => u.guid == guid);
                 if (usr != null) {
                     user = new accountModel();
                     user.First = usr.First;
                     user.Last = usr.Last;
                     user.Username = usr.Username;
                 }
-
-                context.Dispose();
             }
 
             return user;            
@@ -122,17 +114,15 @@ namespace www.DataAccess
         /// <param name="UserID">Database UserID for this user.</param>
         /// <param name="model">accountModel containing the users updated information.</param>
         /// <returns>Returns a true/false if the database update was successful.</returns>
-        public static void UpdateAccount(Int32 UserID, accountModel model)
+        public static void UpdateAccount(Guid guid, accountModel model)
         {
             using (RootSyncContext context = new RootSyncContext()) {
-                User usr = context.Users.First(u => u.UserID == UserID);
+                User usr = context.Users.First(u => u.guid == guid);
 
                 usr.First = model.First;
                 usr.Last = model.Last;
 
                 context.SaveChanges();
-
-                context.Dispose();
             }
         }
     }

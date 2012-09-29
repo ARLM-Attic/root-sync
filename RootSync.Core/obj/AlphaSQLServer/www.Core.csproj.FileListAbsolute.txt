@@ -1,0 +1,5 @@
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\bin\Debug\www.Core.dll
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\bin\Debug\www.Core.pdb
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\AlphaSQLServer\ResolveAssemblyReference.cache
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\AlphaSQLServer\www.Core.dll
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\AlphaSQLServer\www.Core.pdb

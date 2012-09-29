@@ -14,10 +14,17 @@ namespace rootsync.Business.Models {
             //TODO: Right now, just delete any existing database and recreate
             //      this will obviously change in the near future. :)
 
-            if (context.Database.Exists()) {
+
+            //uncomment these lines if you change the database at all... this will delete the current DB and create a new one
+            if (context.Database.Exists())
+            {
                 context.Database.Delete();
             }
-            context.Database.Create();
+            if (!context.Database.Exists()) context.Database.Create();
+
+
+
+
 
             //TODO: This would be a good time to setup any sample data
             //      Also, tables that need to be prepopulated ... (ie: US States, Role Definitions, etc.) indexes, etc.

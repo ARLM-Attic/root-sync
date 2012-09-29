@@ -1,0 +1,5 @@
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\bin\Alpha - SQL Express\www.Core.dll
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\bin\Alpha - SQL Express\www.Core.pdb
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\AlphaSQLExpress\ResolveAssemblyReference.cache
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\AlphaSQLExpress\www.Core.dll
+C:\Users\Daniel\Dropbox\Projects\RootSync\RootSync.Core\obj\AlphaSQLExpress\www.Core.pdb

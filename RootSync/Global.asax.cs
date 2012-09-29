@@ -30,7 +30,9 @@ namespace www
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            
+
+
+
             //handles the browsing of files with a specified path
             routes.MapRoute(
                 "Files",
