@@ -16,10 +16,10 @@ namespace rootsync.Business.Models {
 
 
             //uncomment these lines if you change the database at all... this will delete the current DB and create a new one
-            if (context.Database.Exists())
-            {
-                context.Database.Delete();
-            }
+            //if (context.Database.Exists())
+            //{
+            //    context.Database.Delete();
+            //}
             if (!context.Database.Exists()) context.Database.Create();
 
 
