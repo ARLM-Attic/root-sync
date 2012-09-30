@@ -154,6 +154,7 @@
     <Content Include="Content\index_up.png" />
     <Content Include="Content\default.jpg" />
     <Content Include="Content\jquery.contextMenu.css" />
+    <Content Include="Content\normalize.css" />
     <Content Include="Content\signin.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -201,6 +202,7 @@
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\RootSync.Common.js" />
+    <Content Include="Scripts\RootSync.files.js" />
     <Content Include="Scripts\RootSync.intro.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

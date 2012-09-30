@@ -8,6 +8,8 @@ using System.ComponentModel;
 namespace rootsync.Business.Models {
     public class User {
         [Key]
+        public int UserID { get; set; }
+
         public Guid guid { get; set; }
         
         [MaxLength(50)]
@@ -27,6 +29,12 @@ namespace rootsync.Business.Models {
         
         [DefaultValue(typeof(int), "0")]
         public int numLogins { get; set; }
-        
+
+        public static User GetUserByGUID(Guid guid) {
+            using (RootSyncContext context = new RootSyncContext()) {
+                return context.Users.FirstOrDefault(u => u.guid == guid);
+            }
+        }
+
     }
 }

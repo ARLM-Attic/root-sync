@@ -8,6 +8,7 @@ using www.Models;
 using System.Web.Security;
 using System.Threading;
 using System.Configuration;
+using www.DataAccess;
 
 
 namespace www.Controllers
@@ -26,9 +27,8 @@ namespace www.Controllers
 
         public ActionResult Edit()
         {
-            Guid guid = Guid.Parse(User.Identity.Name);
-
-            accountModel model = DataAccess.DAL.retAccount(guid);
+            rootsync.Business.Models.User usr = rootsync.Business.Models.User.GetUserByGUID(Guid.Parse(User.Identity.Name));
+            accountModel model = accountModel.FromUser(usr);
 
             return View(model);
         }

@@ -84,30 +84,6 @@ namespace www.DataAccess
             }
         }
 
-
-        /// <summary>
-        /// Retrieves a users entire profile from the database. 
-        /// </summary>
-        /// <param name="UserID">Database UserID to be retrieved</param>
-        /// <returns>accountModel object with data for this user.</returns>
-        public static accountModel retAccount(Guid guid)
-        {
-            accountModel user = null;
-
-            using (RootSyncContext context = new RootSyncContext()) {
-                User usr = context.Users.FirstOrDefault(u => u.guid == guid);
-                if (usr != null) {
-                    user = new accountModel();
-                    user.First = usr.First;
-                    user.Last = usr.Last;
-                    user.Username = usr.Username;
-                }
-            }
-
-            return user;            
-        }
-
-
         /// <summary>
         /// Recieves a accountModel and updates the data in our database accordingly.
         /// </summary>

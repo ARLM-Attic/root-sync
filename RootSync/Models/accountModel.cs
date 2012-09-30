@@ -27,6 +27,14 @@ namespace www.Models
         public string Password { get; set; }
 
 
+
+        public static accountModel FromUser(rootsync.Business.Models.User user) {
+            accountModel am = new accountModel();
+            am.First = user.First;
+            am.Last = user.Last;
+            am.Username = user.Username;
+            return am;
+        }
     }
 
 
