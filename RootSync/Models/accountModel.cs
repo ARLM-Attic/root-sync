@@ -9,6 +9,10 @@ namespace www.Models
 {
     public class accountModel
     {
+        public Int32 id { get; set; }
+        public Guid guid { get; set; }
+        
+        
         [Required]
         [Display(Name = "First Name")]
         public string First { get; set; }

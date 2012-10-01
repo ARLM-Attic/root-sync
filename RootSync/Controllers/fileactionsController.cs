@@ -14,7 +14,8 @@ namespace www.Controllers
     {
         public string RootPath {
             get {
-                return ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
+                accountModel usr = www.DataAccess.DAL.retAccount(Int32.Parse(User.Identity.Name));
+                return ConfigurationManager.AppSettings["path"] + usr.guid + "/";
             }
         }
 
@@ -94,35 +95,10 @@ namespace www.Controllers
         
 
 
-        //[HttpGet]
-        //public ActionResult UploadFile()
-        //{
-        //    if (Request.IsAjaxRequest())
-        //    {
-        //        return PartialView("_UploadFile");
-        //    }
-        //    return View();
-        //}
-
 
         List<uploadfileModel> Uploads = new List<uploadfileModel>();
                 
-        //[HttpPost]
-        //public ActionResult UploadFile(HttpPostedFileBase file, string path) 
-        //{    
-        //    if (file != null) {        
-        //        //Uploads.Add(file);    
-
-        //        string FTPPath = ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
-        //        var fileName = FTPPath + System.IO.Path.GetFileName(file.FileName);
-        //        file.SaveAs(fileName);
-
-        //    }    
-        //    return RedirectToAction("index");
-        //}
-
-
-
+       
         public ActionResult UploadFile(string path)
         {
             ViewBag.path = path;
@@ -135,7 +111,7 @@ namespace www.Controllers
                 
                 var fileName = System.IO.Path.GetFileName(file.Filename);
 
-                string FTPPath = ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
+                string FTPPath = RootPath;
 
                 //first validate this user's folder exists, if not, we need to create it.
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);
@@ -261,7 +237,7 @@ namespace www.Controllers
             try
             {
 
-                string FTPPath = ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
+                string FTPPath = RootPath;
 
                 //first validate this user's folder exists, if not, we need to create it.
                 if (!System.IO.Directory.Exists(FTPPath)) System.IO.Directory.CreateDirectory(FTPPath);

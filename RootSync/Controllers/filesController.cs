@@ -12,9 +12,12 @@ namespace www.Controllers
     public class filesController : Controller
     {
 
-        public string RootPath {
-            get {
-                return ConfigurationManager.AppSettings["path"] + User.Identity.Name + "/";
+        public string RootPath
+        {
+            get
+            {
+                accountModel usr = www.DataAccess.DAL.retAccount(Int32.Parse(User.Identity.Name));
+                return ConfigurationManager.AppSettings["path"] + usr.guid + "/";
             }
         }
 

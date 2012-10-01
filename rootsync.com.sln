@@ -27,8 +27,6 @@ Global
 		Alpha - SQL Express|Any CPU = Alpha - SQL Express|Any CPU
 		Alpha.RootSync.com|Any CPU = Alpha.RootSync.com|Any CPU
 		Beta.RootSync.com|Any CPU = Beta.RootSync.com|Any CPU
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
 		RootSync.com|Any CPU = RootSync.com|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -38,10 +36,6 @@ Global
 		{5B79C957-13E3-4602-BCD2-C06088D4D894}.Alpha.RootSync.com|Any CPU.Build.0 = Alpha|Any CPU
 		{5B79C957-13E3-4602-BCD2-C06088D4D894}.Beta.RootSync.com|Any CPU.ActiveCfg = Beta|Any CPU
 		{5B79C957-13E3-4602-BCD2-C06088D4D894}.Beta.RootSync.com|Any CPU.Build.0 = Beta|Any CPU
-		{5B79C957-13E3-4602-BCD2-C06088D4D894}.Debug|Any CPU.ActiveCfg = AlphaSQLExpress|Any CPU
-		{5B79C957-13E3-4602-BCD2-C06088D4D894}.Debug|Any CPU.Build.0 = AlphaSQLExpress|Any CPU
-		{5B79C957-13E3-4602-BCD2-C06088D4D894}.Release|Any CPU.ActiveCfg = AlphaSQLExpress|Any CPU
-		{5B79C957-13E3-4602-BCD2-C06088D4D894}.Release|Any CPU.Build.0 = AlphaSQLExpress|Any CPU
 		{5B79C957-13E3-4602-BCD2-C06088D4D894}.RootSync.com|Any CPU.ActiveCfg = Prod|Any CPU
 		{5B79C957-13E3-4602-BCD2-C06088D4D894}.RootSync.com|Any CPU.Build.0 = Prod|Any CPU
 		{749CB505-5184-4AFD-8039-5F4AF66839C5}.Alpha - SQL Express|Any CPU.ActiveCfg = AlphaSQLExpress|Any CPU
@@ -50,10 +44,6 @@ Global
 		{749CB505-5184-4AFD-8039-5F4AF66839C5}.Alpha.RootSync.com|Any CPU.Build.0 = Alpha|Any CPU
 		{749CB505-5184-4AFD-8039-5F4AF66839C5}.Beta.RootSync.com|Any CPU.ActiveCfg = Beta|Any CPU
 		{749CB505-5184-4AFD-8039-5F4AF66839C5}.Beta.RootSync.com|Any CPU.Build.0 = Beta|Any CPU
-		{749CB505-5184-4AFD-8039-5F4AF66839C5}.Debug|Any CPU.ActiveCfg = AlphaSQLExpress|Any CPU
-		{749CB505-5184-4AFD-8039-5F4AF66839C5}.Debug|Any CPU.Build.0 = AlphaSQLExpress|Any CPU
-		{749CB505-5184-4AFD-8039-5F4AF66839C5}.Release|Any CPU.ActiveCfg = AlphaSQLExpress|Any CPU
-		{749CB505-5184-4AFD-8039-5F4AF66839C5}.Release|Any CPU.Build.0 = AlphaSQLExpress|Any CPU
 		{749CB505-5184-4AFD-8039-5F4AF66839C5}.RootSync.com|Any CPU.ActiveCfg = Prod|Any CPU
 		{749CB505-5184-4AFD-8039-5F4AF66839C5}.RootSync.com|Any CPU.Build.0 = Prod|Any CPU
 		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.Alpha - SQL Express|Any CPU.ActiveCfg = AlphaSQLExpress|Any CPU
@@ -62,10 +52,6 @@ Global
 		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.Alpha.RootSync.com|Any CPU.Build.0 = Alpha|Any CPU
 		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.Beta.RootSync.com|Any CPU.ActiveCfg = Beta|Any CPU
 		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.Beta.RootSync.com|Any CPU.Build.0 = Beta|Any CPU
-		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.Debug|Any CPU.ActiveCfg = AlphaSQLExpress|Any CPU
-		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.Debug|Any CPU.Build.0 = AlphaSQLExpress|Any CPU
-		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.Release|Any CPU.ActiveCfg = AlphaSQLExpress|Any CPU
-		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.Release|Any CPU.Build.0 = AlphaSQLExpress|Any CPU
 		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.RootSync.com|Any CPU.ActiveCfg = Prod|Any CPU
 		{3A387597-D5B9-4659-96B5-467C80D3DF9E}.RootSync.com|Any CPU.Build.0 = Prod|Any CPU
 	EndGlobalSection
