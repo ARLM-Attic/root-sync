@@ -138,11 +138,11 @@
                 data: { Name: folderName, path: relativePath },
                 success: function (msg) {
                     if (msg.status === "success") {
-                        if (relativePath.substring(relativePath.length - 1) === "/") {
+                        /*if (relativePath.substring(relativePath.length - 1) === "/") {
                             relativePath += folderName;
                         } else {
                             relativePath += "/" + folderName;
-                        }
+                        }*/
                         refreshDirectory(relativePath);
                     } else {
                         $(msg.responseHTML).dialog();

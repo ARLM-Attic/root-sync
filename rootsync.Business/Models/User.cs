@@ -30,6 +30,12 @@ namespace rootsync.Business.Models {
         [DefaultValue(typeof(int), "0")]
         public int numLogins { get; set; }
 
+        public static User GetByUserID(int userid) {
+            using (RootSyncContext context = new RootSyncContext()) {
+                return context.Users.FirstOrDefault(u => u.userid == userid);
+            }
+        }
+
         public static User GetUserByGUID(Guid guid) {
             using (RootSyncContext context = new RootSyncContext()) {
                 return context.Users.FirstOrDefault(u => u.guid == guid);

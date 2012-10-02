@@ -7,56 +7,47 @@ using System.IO;
 using System.Threading;
 using www.Models;
 using System.Configuration;
+using rootsync.Business.Models;
+using rootsync.Business;
 
 namespace www.Controllers
 {
-    public class fileactionsController : Controller
-    {
-        public string RootPath {
-            get {
-                accountModel usr = www.DataAccess.DAL.retAccount(Int32.Parse(User.Identity.Name));
-                return ConfigurationManager.AppSettings["path"] + usr.guid + "/";
-            }
-        }
-
-        private string GetParentDirectory(string path, int parentCount) {
-            if (string.IsNullOrEmpty(path) || parentCount < 1)
-                return path;
-
-            string parent = System.IO.Path.GetDirectoryName(path);
-
-            if (--parentCount > 0)
-                return GetParentDirectory(parent, parentCount);
-
-            return parent;
-        }
+    public class fileactionsController : Controller {
 
         public ActionResult GetDirectoryList(string path) {
-            string FTPPath = RootPath;
-            string foldername = Request["foldername"];
 
-            if (foldername == "..") {
-                path = path.Substring(0, path.Length - 2);
-                //Remove the last folder
-                path = GetParentDirectory(path, 1);
-            }
+            rootsync.Business.Models.User usr = rootsync.Business.Models.User.GetByUserID(Int32.Parse(User.Identity.Name));
 
-            if (System.IO.Directory.Exists(FTPPath + path)) { FTPPath += path; }
+            RSDirectory rsdir = RSFileSystem.GetDirectory(path, usr.guid);
+            string userRoot = RSFileSystem.GetUserRoot(Guid.Parse(User.Identity.Name));
+            //string FTPPath = RootPath;
+            //string foldername = Request["foldername"];
+
+            //if (foldername == "..") {
+            //    path = path.Substring(0, path.Length - 2);
+            //    //Remove the last folder
+            //    path = RSFileSystem.GetParentDirectory(path, 1);
+            //}
+
+            //if (System.IO.Directory.Exists(FTPPath + path)) { FTPPath += path; }
             
 
-            IEnumerable<DirectoryInfo> dirs = SafeWalk.EnumerateDirectoriesSafe(new DirectoryInfo(FTPPath));
-            IEnumerable<FileInfo> files = SafeWalk.EnumerateFilesSafe(new DirectoryInfo(FTPPath));
+            IEnumerable<DirectoryInfo> dirs = SafeWalk.EnumerateDirectoriesSafe(new DirectoryInfo(rsdir.SystemPath));
+            IEnumerable<FileInfo> files = SafeWalk.EnumerateFilesSafe(new DirectoryInfo(rsdir.SystemPath));
 
 
-            if (FTPPath == RootPath) {
+            if (rsdir.SystemPath == userRoot) {
                 ViewBag.path = "";
                 ViewBag.FolderName = " Home";
                 ViewBag.ParentPath = "";
             } else {
-                if (!FTPPath.EndsWith("/")) FTPPath += "/";
+
+                //TODO: replace this with a "safe" RSDirectory.GetRelativePath() which will return the user-visible path
+
+                if (!rsdir.SystemPath.EndsWith("/")) rsdir.SystemPath += "/";
 
 
-                ViewBag.path = FTPPath.Replace(RootPath, "");
+                ViewBag.path = rsdir.SystemPath.Replace(userRoot, "");
 
                 ViewBag.ShowGT = true;
                 string[] p = ViewBag.path.Split('/');
